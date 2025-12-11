@@ -1,15 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
- use App\Models\Category;
- use App\Models\Post;
+
+use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-     public function index()
-{
-    $categories = Category::all();
-    return view('categories', compact('categories'));
-}
+    public function index()
+    {
+        $category = Category::withCount('posts')->get();
+        return view('categories',compact('category'));
+    }
 }
